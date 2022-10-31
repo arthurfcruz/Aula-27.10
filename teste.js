@@ -25,3 +25,11 @@ function buscarNome(){
        }
     }
 }
+
+function ordemID() {
+    for (var index3 = 0; index3 < index; index3++) {
+        console.log("ID:", ids[index3], "produto:", nomes[index3])
+    }
+}
+cadastrarProduto()
+ordemID()
