@@ -12,6 +12,7 @@ var avaliacaoSup = []
 var indexSup = 0
 var menorId = 0
 var menorPreco = 0
+var menorAvaliacao = 0
 
 function cadastrarProduto(){ 
     ids[index] = parseInt(prompt("digite a ID do produto para cadastrar"))
@@ -85,6 +86,41 @@ function ordemPreco() {
                 avaliacaoSup [indexSup] = avaliacao[index3]
                 precos[index3] = 1000000000000
                 indexSup++
+            }
+        }
+    }
+ ids = idsSup
+ nomes = nomesSup
+ precos = precosSup
+ avaliacao = avaliacaoSup
+ indexSup = 0
+
+    for (var contador = 0; contador < nomes.length; contador++) {
+        console.log(ids[contador], nomes[contador], precos[contador], avaliacao[contador])    
+    }
+}
+
+function ordemAvaliacao() {
+    for (var index = 0; index < nomes.length; index++) {
+        menorAvaliacao = avaliacao[index]
+      
+        var contador1 = 0
+      
+        for (var index2 = 0; index2 < nomes.length; index2++) {
+           if (avaliacao[index2] < menorAvaliacao) {
+                menorAvaliacao = avaliacao[index2]
+            }
+        }
+    
+      for (var index3 = 0; index3 < nomes.length; index3++) {
+            if (menorAvaliacao == avaliacao[index3] && contador1 == 0 ) {
+                idsSup [indexSup] = ids[index3]
+                nomesSup [indexSup] = nomes[index3]
+                precosSup [indexSup] = precos[index3]
+                avaliacaoSup [indexSup] = avaliacao[index3]
+                avaliacao[index3] = 1000000000000
+                indexSup++
+                contador1++
             }
         }
     }
