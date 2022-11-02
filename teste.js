@@ -142,3 +142,25 @@ function atualizarPreco(id, novoValor){
         }
     }
 }
+
+function deletarProduto(nome){
+    
+    for (var index = 0; index < nomes.length; index++) {
+        if (nome == nomes[index]) {
+            nomes[index] = 0 
+        }
+    }
+    for (var index = 0; index < nomes.length; index++) {
+       if (nomes[index] != 0) {
+            idsSup[indexSup] = ids[index]
+            nomesSup[indexSup] = nomes[index]
+            precosSup[indexSup] = precos[index]
+            avaliacaoSup[indexSup] = avaliacao[index]
+            indexSup++
+        }
+    }
+    ids = idsSup
+    nomes = nomesSup
+    precos = precosSup
+    avaliacao = avaliacaoSup
+}
