@@ -134,3 +134,11 @@ function ordemAvaliacao() {
         console.log(ids[contador], nomes[contador], precos[contador], avaliacao[contador])    
     }
 }
+
+function atualizarPreco(id, novoValor){
+    for (var index = 0; index < ids.length; index++) {
+        if (id == ids[index]) {
+            precos[index] = novoValor
+        }
+    }
+}
