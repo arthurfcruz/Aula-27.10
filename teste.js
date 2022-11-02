@@ -2,34 +2,67 @@ var nomes = []
 var ids = []
 var precos = []
 var avaliacao = []
-index = 0
+var index = 0
+var indexId = 0
+
+var nomesSup = []
+var idsSup = []
+var precosSup = []
+var avaliacaoSup = []
+var indexSup = 0
+var menorId = 0
 
 function cadastrarProduto(){ 
-    ids[index] = prompt("digite a ID do produto para cadastrar")
+    ids[index] = parseInt(prompt("digite a ID do produto para cadastrar"))
     nomes[index] = prompt("digite o nome do produto para cadastrar")
-    precos[index] = prompt("digite o preço do produto para cadastrar")
-    avaliacao[index] = prompt("digite a avaliacao do produto para cadastrar")
+    precos[index] = parseInt(prompt("digite o preço do produto para cadastrar"))
+    avaliacao[index] = parseInt(prompt("digite a avaliacao do produto para cadastrar"))
     index++
 } 
 
 function buscarID(){
-    var index1 = prompt("digite a id do produto para buscar no sistema")
-    console.log(ids[index1], nomes[index1], precos[index1], avaliacao[index1])
+    var index = prompt("digite a id do produto para buscar no sistema")
+    console.log(ids[index], nomes[index], precos[index], avaliacao[index])
 }
 
 function buscarNome(){
     var nome = prompt("digite o nome do produto para buscar no sistema")
-    for (var index2 = 0; index2 < nomes.length; index2++) {
-       if (nome == nomes[index2]) {
-        console.log("o produto com o nome", nomes[index2], "tem a id", ids[index2])
-       }
+    for (var index = 0; index < nomes.length; index++) {
+        if (nome == nomes[index]) {
+            console.log("o produto com o nome", nomes[index], "tem a id", ids[index])
+        }
     }
 }
 
 function ordemID() {
-    for (var index3 = 0; index3 < index; index3++) {
-        console.log("ID:", ids[index3], "produto:", nomes[index3])
+    for (var index = 0; index < ids.length; index++) {
+        menorId = ids[index]
+    
+      for (var index2 = 0; index2 < ids.length; index2++) {
+           if (ids[index2] < menorId) {
+                menorId = ids[index2]
+            }
+        }
+    
+      for (var index3 = 0; index3 < ids.length; index3++) {
+            if (menorId == ids[index3]) {
+                idsSup [indexSup] = ids[index3]
+                nomesSup [indexSup] = nomes[index3]
+                precosSup [indexSup] = precos[index3]
+                avaliacaoSup [indexSup] = avaliacao[index3]
+                ids[index3] = 1000000000000
+                indexSup++
+            }
+        }
+    }
+ ids = idsSup
+ nomes = nomesSup
+ precos = precosSup
+ avaliacao = avaliacaoSup
+ indexSup = 0
+
+    for (var contador = 0; contador < ids.length; contador++) {
+        console.log(ids[contador], nomes[contador], precos[contador], avaliacao[contador])    
     }
 }
-cadastrarProduto()
-ordemID()
+
