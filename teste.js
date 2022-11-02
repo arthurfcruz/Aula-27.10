@@ -22,13 +22,11 @@ function cadastrarProduto(){
     index++
 } 
 
-function buscarID(){
-    var index = prompt("digite a id do produto para buscar no sistema")
-    console.log(ids[index], nomes[index], precos[index], avaliacao[index])
+function buscarID(id){
+    console.log(ids[id], nomes[id], precos[id], avaliacao[id])
 }
 
-function buscarNome(){
-    var nome = prompt("digite o nome do produto para buscar no sistema")
+function buscarNome(nome){
     for (var index = 0; index < nomes.length; index++) {
         if (nome == nomes[index]) {
             console.log("o produto com o nome", nomes[index], "tem a id", ids[index])
@@ -143,10 +141,10 @@ function atualizarPreco(id, novoValor){
     }
 }
 
-function deletarProduto(nome){
+function deletarProduto(produtoDeletado){
     
     for (var index = 0; index < nomes.length; index++) {
-        if (nome == nomes[index]) {
+        if (produtoDeletado == nomes[index]) {
             nomes[index] = 0 
         }
     }
@@ -163,4 +161,52 @@ function deletarProduto(nome){
     nomes = nomesSup
     precos = precosSup
     avaliacao = avaliacaoSup
+}
+
+var continuar = 's'
+while (continuar == 's') {
+    var opcao = parseInt(prompt('insira o que deseja fazer: 1-Cadastrar produto; 2-Buscar por id; 3-Buscar por nome; 4-Ordenar por id; 5-Ordenar por preço; 6-Ordenar por avaliaçao; 7-Atualizar preço; 8-Deletar produto'))
+    
+    if (opcao = 1) {
+        
+        cadastrarProduto()
+        console.log('produto cadastrado com sucesso!')
+
+    } else if (opcao = 2) {
+        
+        var id = prompt("digite a id do produto para buscar no sistema")
+        buscarID(id)
+        
+    }else if (opcao = 3) {
+        
+        var nome = prompt("digite o nome do produto para buscar no sistema")
+        buscarNome(nome)
+
+    }else if (opcao = 4) {
+        
+        ordemID()
+
+    }else if (opcao = 5) {
+        
+        ordemPreco()
+
+    }else if (opcao = 6) {
+        
+        ordemAvaliacao()
+
+    }else if (opcao = 7){
+        
+        var id = parseInt(prompt('insira o id do produto para atualizar o preço'))
+        var novoValor = parseInt(prompt('insira o novo preço do produto'))
+        atualizarPreco(id, novoValor)
+
+    }else if (opcao = 8) {
+        
+        var produtoDeletado = parseInt(prompt('insira o id do produto para ser deletado'))
+        deletarProduto(produtoDeletado)
+        console.log('produto deletado com sucesso!')
+    }
+   
+    continuar = prompt('deseja continuar? s ou n')
+
 }
