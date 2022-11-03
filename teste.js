@@ -23,7 +23,11 @@ function cadastrarProduto(){
 } 
 
 function buscarID(id){
-    console.log(ids[id], nomes[id], precos[id], avaliacao[id])
+    for (var index = 0; index < ids.length; index++) {
+        if (id == ids[index]) {
+            console.log("o produto com a id", ids[index], "tem o nome", nomes[index], "tem o preço", precos[index], "tem o avaliacao", avaliacao[index])
+        }
+    }
 }
 
 function buscarNome(nome){
@@ -35,6 +39,12 @@ function buscarNome(nome){
 }
 
 function ordemID() {
+    
+    nomesSup = []
+    idsSup = []
+    precosSup = []
+    avaliacaoSup = []
+    
     for (var index = 0; index < ids.length; index++) {
         menorId = ids[index]
     
@@ -67,6 +77,12 @@ function ordemID() {
 }
 
 function ordemPreco() {
+    
+    nomesSup = []
+    idsSup = []
+    precosSup = []
+    avaliacaoSup = []
+
     for (var index = 0; index < nomes.length; index++) {
         menorPreco = precos[index]
     
@@ -99,6 +115,12 @@ function ordemPreco() {
 }
 
 function ordemAvaliacao() {
+    
+    nomesSup = []
+    idsSup = []
+    precosSup = []
+    avaliacaoSup = []
+    
     for (var index = 0; index < nomes.length; index++) {
         menorAvaliacao = avaliacao[index]
       
@@ -143,6 +165,11 @@ function atualizarPreco(id, novoValor){
 
 function deletarProduto(produtoDeletado){
     
+    nomesSup = []
+    idsSup = []
+    precosSup = []
+    avaliacaoSup = []
+
     for (var index = 0; index < nomes.length; index++) {
         if (produtoDeletado == nomes[index]) {
             nomes[index] = 0 
@@ -161,48 +188,49 @@ function deletarProduto(produtoDeletado){
     nomes = nomesSup
     precos = precosSup
     avaliacao = avaliacaoSup
+    indexSup = 0
 }
 
 var continuar = 's'
 while (continuar == 's') {
     var opcao = parseInt(prompt('insira o que deseja fazer: 1-Cadastrar produto; 2-Buscar por id; 3-Buscar por nome; 4-Ordenar por id; 5-Ordenar por preço; 6-Ordenar por avaliaçao; 7-Atualizar preço; 8-Deletar produto'))
     
-    if (opcao = 1) {
+    if (opcao == 1) {
         
         cadastrarProduto()
         console.log('produto cadastrado com sucesso!')
 
-    } else if (opcao = 2) {
+    } else if (opcao == 2) {
         
         var id = prompt("digite a id do produto para buscar no sistema")
         buscarID(id)
         
-    }else if (opcao = 3) {
+    }else if (opcao == 3) {
         
         var nome = prompt("digite o nome do produto para buscar no sistema")
         buscarNome(nome)
 
-    }else if (opcao = 4) {
+    }else if (opcao == 4) {
         
         ordemID()
 
-    }else if (opcao = 5) {
+    }else if (opcao == 5) {
         
         ordemPreco()
 
-    }else if (opcao = 6) {
+    }else if (opcao == 6) {
         
         ordemAvaliacao()
 
-    }else if (opcao = 7){
+    }else if (opcao == 7){
         
         var id = parseInt(prompt('insira o id do produto para atualizar o preço'))
         var novoValor = parseInt(prompt('insira o novo preço do produto'))
         atualizarPreco(id, novoValor)
 
-    }else if (opcao = 8) {
+    }else if (opcao == 8) {
         
-        var produtoDeletado = parseInt(prompt('insira o id do produto para ser deletado'))
+        var produtoDeletado = prompt('insira o nome do produto para ser deletado')
         deletarProduto(produtoDeletado)
         console.log('produto deletado com sucesso!')
     }
