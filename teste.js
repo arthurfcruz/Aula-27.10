@@ -238,3 +238,43 @@ while (continuar == 's') {
     continuar = prompt('deseja continuar? s ou n')
 
 }
+
+var nomesCarrinho = []
+var precosCarrinho = []
+var quantidadeCarrinho = []
+var indexCarrinho = 0
+var cont = 0
+var conta = 0
+
+function adicionarNoCarrinho(nome, quantidade){
+    
+    for (var index2 = 0; index2 < nomesCarrinho.length; index2++) {
+        if (nome == nomesCarrinho[index2]) {
+            quantidade[index2] = quantidadeCarrinho[index2] + quantidade
+            console.log("quantidade adicionada com sucesso!")
+            conta++
+        }
+    }
+
+    while (conta == 0) {
+        
+        for (var index = 0; index < nomes.length; index++) {
+            if (nome == nomes[index]) {
+                nomesCarrinho[indexCarrinho] = nome
+                quantidadeCarrinho[indexCarrinho] = quantidade
+                indexCarrinho++
+                cont++
+                console.log("produto adicionado com sucesso!")
+            } 
+        }  
+     
+        if (cont == 0) {
+            console.log("nao existe produto com esse nome")
+        }
+        conta++
+    }
+    console.log('voce adicionou o produto',nome,quantidade, "vezes")
+}
+
+nome = prompt("qual produto deseja adicionar no carrinho?")
+quantidade = prompt("quantos", nome+"s deseja adicionar?")
