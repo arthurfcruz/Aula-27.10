@@ -191,56 +191,8 @@ function deletarProduto(produtoDeletado) {
     indexSup = 0
 }
 
-var continuar = 's'
-while (continuar == 's') {
-    var opcao = parseInt(prompt('insira o que deseja fazer: 1-Cadastrar produto; 2-Buscar por id; 3-Buscar por nome; 4-Ordenar por id; 5-Ordenar por preço; 6-Ordenar por avaliaçao; 7-Atualizar preço; 8-Deletar produto'))
-
-    if (opcao == 1) {
-
-        cadastrarProduto()
-        console.log('produto cadastrado com sucesso!')
-
-    } else if (opcao == 2) {
-
-        var id = prompt("digite a id do produto para buscar no sistema")
-        buscarID(id)
-
-    } else if (opcao == 3) {
-
-        var nome = prompt("digite o nome do produto para buscar no sistema")
-        buscarNome(nome)
-
-    } else if (opcao == 4) {
-
-        ordemID()
-
-    } else if (opcao == 5) {
-
-        ordemPreco()
-
-    } else if (opcao == 6) {
-
-        ordemAvaliacao()
-
-    } else if (opcao == 7) {
-
-        var id = parseInt(prompt('insira o id do produto para atualizar o preço'))
-        var novoValor = parseInt(prompt('insira o novo preço do produto'))
-        atualizarPreco(id, novoValor)
-
-    } else if (opcao == 8) {
-
-        var produtoDeletado = prompt('insira o nome do produto para ser deletado')
-        deletarProduto(produtoDeletado)
-        console.log('produto deletado com sucesso!')
-    }
-
-    continuar = prompt('deseja continuar? s ou n')
-
-}
-
 var nomesCarrinho = []
-var precosCarrinho = []
+var precoCarrinho = []
 var quantidadeCarrinho = []
 var nomesCarrinhoSup = []
 var quantidadeCarrinhoSup = []
@@ -286,19 +238,24 @@ function deletarDoCarrinho(nome, quantidade) {
 
     for (var index = 0; index < nomesCarrinho.length; index++) {
         if (nome == nomesCarrinho[index] && quantidade == quantidadeCarrinho[index]) {
+           
             nomesCarrinho[index] = 0
             quantidadeCarrinho[index] = 0
             console.log("produto excluido do carrinho")
+
         } else if (nome == nomesCarrinho[index] && quantidade < quantidadeCarrinho[index]) {
+            
             quantidadeCarrinho[index] = quantidadeCarrinho[index] - quantidade
+
         } else if (nome == nomesCarrinho[index] && quantidade > quantidadeCarrinho[index]) {
+            
             nomesCarrinho[index] = 0
             quantidadeCarrinho[index] = 0
         }
     }
 
     for (var index = 0; index < nomesCarrinho.length; index++) {
-        if (nomesCarrinho[index] != 0) {
+        if (nomesCarrinho[index] != 0 && quantidadeCarrinho[index] != 0) {
             nomesCarrinhoSup[indexSupCarrinho] = nomesCarrinho[index]
             quantidadeCarrinhoSup[indexSupCarrinho] = quantidadeCarrinho[index]
             indexSupCarrinho++
@@ -308,4 +265,83 @@ function deletarDoCarrinho(nome, quantidade) {
     nomes = nomesCarrinhoSup
     quantidade = quantidadeCarrinhoSup
     indexSupCarrinho = 0
+}
+
+function valorCarrinho(){
+    var valorTotal = 0
+    for (let index = 0; index < nomesCarrinho.length; index++) {
+        valorTotal = valorTotal + (precoCarrinho[index] * quantidadeCarrinho[index])
+    }
+    return valorTotal
+}
+
+function exibirCarrinho(){
+    for (let index = 0; index < nomesCarrinho.length; index++) {
+        console.log('Produto' + nomesCarrinho[index] + ', ' + quantidadeCarrinho[index] + 'unidades')
+        var exibirValorT = valorCarrinho()
+        console.log(exibirValorT)
+    }
+}
+
+var continuar = 's'
+while (continuar == 's') {
+    var opcao = parseInt(prompt('insira o que deseja fazer: 1-Cadastrar produto; 2-Buscar por id; 3-Buscar por nome; 4-Ordenar por id; 5-Ordenar por preço; 6-Ordenar por avaliaçao; 7-Atualizar preço; 8-Deletar produto'))
+    var menus = prompt('Digite 1 para entrar no menu d admin e 2 para o menu cliente')
+
+    if (menus == 1){
+        if (opcao == 1) {
+
+            cadastrarProduto()
+            console.log('produto cadastrado com sucesso!')
+
+        } else if (opcao == 2) {
+
+            var id = prompt("digite a id do produto para buscar no sistema")
+            buscarID(id)
+
+        } else if (opcao == 3) {
+
+            var nome = prompt("digite o nome do produto para buscar no sistema")
+            buscarNome(nome)
+
+        } else if (opcao == 4) {
+
+            ordemID()
+
+        } else if (opcao == 5) {
+
+            ordemPreco()
+
+        } else if (opcao == 6) {
+
+            ordemAvaliacao()
+
+        } else if (opcao == 7) {
+
+            var id = parseInt(prompt('insira o id do produto para atualizar o preço'))
+            var novoValor = parseInt(prompt('insira o novo preço do produto'))
+            atualizarPreco(id, novoValor)
+
+        } else if (opcao == 8) {
+
+            var produtoDeletado = prompt('insira o nome do produto para ser deletado')
+            deletarProduto(produtoDeletado)
+            console.log('produto deletado com sucesso!')
+        }
+
+        continuar = prompt('deseja continuar? s ou n')
+    } else{
+        var opcaoCarrinho = prompt('O q deseja fazer? 1-Adicionar ao carrinho, 2-Excluir do carrinho 3-Exibir total da compra')
+        if (opcaoCarrinho == '1') {
+            var nomesCarrinho = prompt('insira o nome do produto que deseja adicionar no carrinho')
+            var quantidadeCarrinho = parseInt(prompt('insira a quantidade deste produto que deseja adicionar no carrinho'))
+            adicionarNoCarrinho(nomesCarrinho, quantidadeCarrinho)
+        } else if (opcaoCarrinho == '2') {
+            var nomesCarrinho = prompt('insira o nome do produto que deseja excluir do carrinho')
+            var quantidadeCarrinho = parseInt(prompt('insira a quantidade deste produto que deseja excluir do carrinho'))
+            deletarDoCarrinho(nomesCarrinho, quantidadeCarrinho)
+        } else
+        exibirCarrinho()
+    }
+    continuar = prompt('deseja continuar? s ou n')
 }
